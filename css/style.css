@@ -5,6 +5,7 @@
 
 body {
   position: relative;
+  max-width: 1920px;
 }
 
 .overlay {
