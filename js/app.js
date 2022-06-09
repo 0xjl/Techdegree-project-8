@@ -20,7 +20,8 @@ function generateCards(data) {
     let city = data.location.city;
     let picture = data.picture;
     employeeHTML += `
-    <div class="card" data-index="${index}">
+    <a>
+    <div class="lightbox card" data-index="${index}">
     <img class="avatar" src="${picture.large}" />
     <div class="text-container">
     <h2 class="name">${name.first} ${name.last}</h2>
@@ -28,6 +29,7 @@ function generateCards(data) {
     <p class="address">${city}</p>
     </div>
     </div>
+    </a>
     `;
   });
   gridContainer.innerHTML = employeeHTML;
