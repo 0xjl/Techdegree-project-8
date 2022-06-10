@@ -60,7 +60,7 @@ function displayModal(index) {
   <p class="address">${city}</p>
   <hr>
   <p>${phone}</p>
-  <p class="address">${street.name}, ${state} ${postcode}</p>
+  <p class="address">${street.number} ${street.name}, ${state} ${postcode}</p>
   <p>Birthday:
   ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}</p>
   </div>
@@ -90,7 +90,7 @@ function searchFilter() {
   const employeeArr = [...employeeNames];
   employeeArr.forEach((employee) => {
     if (employee.innerHTML.toUpperCase().indexOf(searchFilter) > -1) {
-      employee.closest(".card").style.display = "";
+      employee.closest(".card").style.display = "flex";
     } else {
       employee.closest(".card").style.display = "none";
     }
@@ -98,17 +98,17 @@ function searchFilter() {
 }
 
 //event listeners
+nextButton.addEventListener("click", nextCard);
+previousButton.addEventListener("click", previousCard);
+userInput.addEventListener("keyup", searchFilter);
+modalClose.addEventListener("click", () => {
+  overlay.classList.add("hidden");
+});
+
 gridContainer.addEventListener("click", (e) => {
   if (e.target !== gridContainer) {
     const card = e.target.closest(".card");
     const index = card.getAttribute("data-index");
     displayModal(index);
   }
-});
-
-nextButton.addEventListener("click", nextCard);
-previousButton.addEventListener("click", previousCard);
-userInput.addEventListener("keyup", searchFilter);
-modalClose.addEventListener("click", () => {
-  overlay.classList.add("hidden");
 });
