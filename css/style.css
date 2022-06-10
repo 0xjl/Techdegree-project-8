@@ -84,7 +84,6 @@ hr {
   margin: 1em;
   border-radius: 10px;
   display: flex;
-  box-shadow: 1px solid lightgrey;
 }
 
 .card:hover {
