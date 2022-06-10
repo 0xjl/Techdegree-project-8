@@ -4,8 +4,45 @@
 }
 
 body {
+  font-family: Arial, Helvetica, sans-serif;
   position: relative;
-  max-width: 1920px;
+  font-size: 1em;
+  margin: 0 auto;
+  max-width: 1440px;
+  max-height: 1024px;
+  padding: 0 1em;
+}
+
+header {
+  padding: 0 1em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-div {
+  margin: 1.75em;
+}
+
+h1 {
+  font-weight: 300;
+}
+
+h2,
+p {
+  padding-bottom: 8px;
+}
+
+p {
+  color: #778;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .overlay {
@@ -14,7 +51,8 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(100, 100, 100, 0.4);
+  background: rgba(100, 100, 100, 0.486);
+  animation: fadein 0.3s ease-in;
 }
 
 .modal {
@@ -26,12 +64,46 @@ body {
   border-radius: 5px;
   padding: 30px 20px;
 }
+
+hr {
+  margin: 1em 0;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card {
+  margin: 1em;
+  border-radius: 10px;
+  display: flex;
+  border: 1px solid lightgrey;
+}
+
+.avatar {
+  margin: 1em;
+  border-radius: 50%;
+}
+
+.modal {
+  width: 28%;
+}
+
 .modal-close {
   position: absolute;
-  right: 15px;
-  top: 5px;
+  right: 2em;
+  top: 0.75em;
   cursor: pointer;
+  border: 0;
 }
+
 .hidden {
   display: none;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
 }
