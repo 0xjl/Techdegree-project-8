@@ -27,7 +27,7 @@ function displayEmployees(employeeData) {
     let city = employee.location.city;
     let picture = employee.picture;
     employeeHTML += `
-  <div class="card" id="card${index}" data-index="${index}">
+  <div class="card" data-index="${index}">
   <img class="avatar" src="${picture.large}" />
   <div class="text-container">
   <h2 class="name">${name.first} ${name.last}</h2>
