@@ -103,6 +103,10 @@ hr {
   display: none;
 }
 
+.button-container {
+  margin-top: 2em;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, auto);

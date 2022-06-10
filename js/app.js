@@ -4,6 +4,7 @@ const gridContainer = document.querySelector(".grid-container");
 const overlay = document.querySelector(".overlay");
 const modalContainer = document.querySelector(".modal-content");
 const modalClose = document.querySelector(".modal-close");
+const userInput = document.getElementById("userinput");
 const nextButton = document.querySelector(".modal-next");
 const previousButton = document.querySelector(".modal-previous");
 let employees = [];
@@ -25,7 +26,7 @@ function displayEmployees(employeeData) {
     let city = employee.location.city;
     let picture = employee.picture;
     employeeHTML += `
-  <div class="card" data-index="${index}">
+  <div class="card" id="card${index}" data-index="${index}">
   <img class="avatar" src="${picture.large}" />
   <div class="text-container">
   <h2 class="name">${name.first} ${name.last}</h2>
@@ -55,7 +56,7 @@ function displayModal(index) {
   <h2 class="name">${name.first} ${name.last}</h2>
   <p class="email">${email}</p>
   <p class="address">${city}</p>
-  <hr />
+  <hr>
   <p>${phone}</p>
   <p class="address">${street.name}, ${state} ${postcode}</p>
   <p>Birthday:
@@ -66,13 +67,38 @@ function displayModal(index) {
   modalContainer.innerHTML = modalHTML;
 }
 
+gridContainer.addEventListener("click", (e) => {
+  if (e.target !== gridContainer) {
+    const card = e.target.closest(".card");
+    const index = card.getAttribute("data-index");
+    displayModal(index);
+  }
+});
+
+modalClose.addEventListener("click", () => {
+  overlay.classList.add("hidden");
+});
+
+userInput.addEventListener("keyup", () => {
+  const employeeNames = document.getElementsByClassName("name");
+  const searchInput = userInput.value.toUpperCase();
+  console.log(searchInput);
+  const EmployeeArray = [...employeeNames];
+  EmployeeArray.forEach((employee) => {
+    if (employee.innerHTML.toUpperCase().indexOf(searchInput) > -1) {
+      employee.closest(".card").style.display = "";
+    } else {
+      employee.closest(".card").style.display = "none";
+    }
+  });
+});
+
 function nextCard(index) {
   nextButton.addEventListener("click", (e) => {
     if (e.target.className === "modal-next") {
-      if (index > 0 && index <= 11) {
+      if (index < 11 && index > 0) {
         index++;
         displayModal(index);
-        console.log(index);
       } else {
         return index;
       }
@@ -92,18 +118,3 @@ function previousCard(index) {
     }
   });
 }
-
-gridContainer.addEventListener("click", (e) => {
-  const card = e.target.closest(".card");
-  const index = card.getAttribute("data-index");
-  if (e.target !== gridContainer) {
-    e.preventDefault();
-    displayModal(index);
-    nextCard(index);
-    previousCard(index);
-  }
-});
-
-modalClose.addEventListener("click", () => {
-  overlay.classList.add("hidden");
-});
