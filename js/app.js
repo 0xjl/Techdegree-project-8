@@ -8,6 +8,7 @@ const userInput = document.getElementById("userinput");
 const nextButton = document.querySelector(".modal-next");
 const previousButton = document.querySelector(".modal-previous");
 let employees = [];
+let employeesIndex;
 
 /// fetch ///
 let fetchResults = fetch(url)
@@ -49,6 +50,7 @@ function displayModal(index) {
     location: { city, street, state, postcode },
     picture,
   } = employees[index];
+  employeesIndex = employees.indexOf(employees[index]);
   let date = new Date(dob.date);
   const modalHTML = `
   <img class="avatar" src="${picture.large}" />
@@ -67,6 +69,35 @@ function displayModal(index) {
   modalContainer.innerHTML = modalHTML;
 }
 
+// next card function
+function nextCard() {
+  if (employeesIndex < 11) {
+    displayModal((employeesIndex += 1));
+  }
+}
+
+// previous card function
+function previousCard() {
+  if (employeesIndex > 0) {
+    displayModal((employeesIndex -= 1));
+  }
+}
+
+// search filter function
+function searchFilter() {
+  const employeeNames = document.getElementsByClassName("name");
+  const searchFilter = userInput.value.toUpperCase();
+  const employeeArr = [...employeeNames];
+  employeeArr.forEach((employee) => {
+    if (employee.innerHTML.toUpperCase().indexOf(searchFilter) > -1) {
+      employee.closest(".card").style.display = "";
+    } else {
+      employee.closest(".card").style.display = "none";
+    }
+  });
+}
+
+//event listeners
 gridContainer.addEventListener("click", (e) => {
   if (e.target !== gridContainer) {
     const card = e.target.closest(".card");
@@ -75,46 +106,9 @@ gridContainer.addEventListener("click", (e) => {
   }
 });
 
+nextButton.addEventListener("click", nextCard);
+previousButton.addEventListener("click", previousCard);
+userInput.addEventListener("keyup", searchFilter);
 modalClose.addEventListener("click", () => {
   overlay.classList.add("hidden");
 });
-
-userInput.addEventListener("keyup", () => {
-  const employeeNames = document.getElementsByClassName("name");
-  const searchInput = userInput.value.toUpperCase();
-  console.log(searchInput);
-  const EmployeeArray = [...employeeNames];
-  EmployeeArray.forEach((employee) => {
-    if (employee.innerHTML.toUpperCase().indexOf(searchInput) > -1) {
-      employee.closest(".card").style.display = "";
-    } else {
-      employee.closest(".card").style.display = "none";
-    }
-  });
-});
-
-function nextCard(index) {
-  nextButton.addEventListener("click", (e) => {
-    if (e.target.className === "modal-next") {
-      if (index < 11 && index > 0) {
-        index++;
-        displayModal(index);
-      } else {
-        return index;
-      }
-    }
-  });
-}
-
-function previousCard(index) {
-  previousButton.addEventListener("click", (e) => {
-    if (e.target.className === "modal-previous") {
-      if (index < 11 && index > 0) {
-        index--;
-        displayModal(index);
-      } else {
-        return index;
-      }
-    }
-  });
-}
