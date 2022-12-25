@@ -1,12 +1,12 @@
 const url = `https://randomuser.me/api/?results=12&inc=name, picture,
 email, location, phone, dob &noinfo &nat=US`;
-const gridContainer = document.querySelector(".grid-container");
-const overlay = document.querySelector(".overlay");
-const modalContainer = document.querySelector(".modal-content");
-const modalClose = document.querySelector(".modal-close");
-const userInput = document.getElementById("userinput");
-const nextButton = document.querySelector(".modal-next");
-const previousButton = document.querySelector(".modal-previous");
+const gridContainer = document.querySelector('.grid-container');
+const overlay = document.querySelector('.overlay');
+const modalContainer = document.querySelector('.modal-content');
+const modalClose = document.querySelector('.modal-close');
+const userInput = document.getElementById('userinput');
+const nextButton = document.querySelector('.modal-next');
+const previousButton = document.querySelector('.modal-previous');
 let employees = [];
 let employeesIndex;
 
@@ -20,14 +20,14 @@ let fetchResults = fetch(url)
 /// generateCard function
 function displayEmployees(employeeData) {
   employees = employeeData;
-  let employeeHTML = "";
+  let employeeHTML = '';
   employees.forEach((employee, index) => {
     let name = employee.name;
     let email = employee.email;
     let city = employee.location.city;
     let picture = employee.picture;
     employeeHTML += `
-  <div class="card" data-index="${index}">
+  <div class="card flex-1" data-index="${index}">
   <img class="avatar" src="${picture.large}" />
   <div class="text-container">
   <h2 class="name">${name.first} ${name.last}</h2>
@@ -53,7 +53,7 @@ function displayModal(index) {
   employeesIndex = employees.indexOf(employees[index]);
   let date = new Date(dob.date);
   const modalHTML = `
-  <img class="avatar" src="${picture.large}" />
+  <img class="avatar my-0 mx-auto" src="${picture.large}" />
   <div class="text-container">
   <h2 class="name">${name.first} ${name.last}</h2>
   <p class="email">${email}</p>
@@ -65,7 +65,7 @@ function displayModal(index) {
   ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}</p>
   </div>
   `;
-  overlay.classList.remove("hidden");
+  overlay.classList.remove('hidden');
   modalContainer.innerHTML = modalHTML;
 }
 
@@ -83,32 +83,17 @@ function previousCard() {
   }
 }
 
-// search filter function
-function searchFilter() {
-  const employeeNames = document.getElementsByClassName("name");
-  const searchFilter = userInput.value.toUpperCase();
-  const employeeArr = [...employeeNames];
-  employeeArr.forEach((employee) => {
-    if (employee.innerHTML.toUpperCase().indexOf(searchFilter) > -1) {
-      employee.closest(".card").style.display = "flex";
-    } else {
-      employee.closest(".card").style.display = "none";
-    }
-  });
-}
-
-//event listeners
-nextButton.addEventListener("click", nextCard);
-previousButton.addEventListener("click", previousCard);
-userInput.addEventListener("keyup", searchFilter);
-modalClose.addEventListener("click", () => {
-  overlay.classList.add("hidden");
+/* event listeners */
+nextButton.addEventListener('click', nextCard);
+previousButton.addEventListener('click', previousCard);
+modalClose.addEventListener('click', () => {
+  overlay.classList.add('hidden');
 });
 
-gridContainer.addEventListener("click", (e) => {
+gridContainer.addEventListener('click', (e) => {
   if (e.target !== gridContainer) {
-    const card = e.target.closest(".card");
-    const index = card.getAttribute("data-index");
+    const card = e.target.closest('.card');
+    const index = card.getAttribute('data-index');
     displayModal(index);
   }
 });

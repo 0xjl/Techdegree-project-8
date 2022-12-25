@@ -7,16 +7,18 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   position: relative;
   font-size: 1em;
-  margin: 0 auto;
-  max-width: 1440px;
-  max-height: 1024px;
   padding: 0 1em;
 }
+
 
 header {
   padding: 0 1em;
   display: flex;
   justify-content: space-between;
+}
+
+.card {
+  border: 1px solid darkgrey;
 }
 
 input {
@@ -137,4 +139,5 @@ hr {
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, auto);
+  margin: 0;
 }

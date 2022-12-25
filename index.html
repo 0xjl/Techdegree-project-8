@@ -5,29 +5,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Employee Directory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
-
-    <header>
-        <h1>Awesome Startup Employee Directory</h1>
-        <div class="input-div">
-            <input id="userinput" type="text">
-        </div>
-    </header>
-
-
+<body class="h-screen">
+      
+    <h1 class="text-center mb-5 text-3xl">Awesome Startup Employee Directory</h1>
     <main class="grid-container">
     </main>
 
     <div class="overlay hidden">
-        <div class="modal">
+        <div class="modal my-15 mx-auto">
             <button class="modal-close">X</button>
-            <div class="modal-content">
+            <div class="modal-content my-0 mx-auto">
             </div>
             <div class="button-container">
                 <button class="modal-previous">Back</button>
@@ -36,7 +30,6 @@
         </div>
 
     </div>
-
 
     <script src="js/app.js"></script>
 </body>
